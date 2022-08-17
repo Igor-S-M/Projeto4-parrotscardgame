@@ -1,0 +1,23 @@
+@media(max-width:400px){
+    .container{
+        width: 100%;
+        height: auto;
+    }
+
+    .titulo{
+        font-size: 36px;
+    }
+
+    .jogo{
+        width: 120px;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .carta{
+        margin-bottom: 34px;
+    }
+}
