@@ -47,12 +47,21 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    
+    transition: all 1s;
+    transform: rotateY(180deg);
+
 }
+
 
 .carta img{
     width: 100px;
     height: 100px;
-    transform: rotateY(50);
+}
+
+.carta .gif{
+    width: 100px;
+    height: 100px;
 }
 
 .esconder{

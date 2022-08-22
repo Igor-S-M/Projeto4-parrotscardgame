@@ -1,42 +1,40 @@
 //LISTA COM AS CARTAS
 let cartas = document.querySelectorAll(".carta");
 lista_cartas = [...cartas];
-lista_cartas_pares=[];
-
-for (let i=0; i<lista_cartas.length;i+=2){
-    lista_cartas_pares.push(lista_cartas[i])
-}
 
 //lista das cartas que vão aparecer na tela
 let lista_visiveis = []
 //lista das cartas que estão viradas para cima
 let cartas_pra_comparar = []
 
+//lista das cartas que foram acertadad
 let cartas_acertou = []
 
+//contador de clicadas
+let contar_clicadas = 0;
 
 //loop parar  ficar dando prompt até o numero desejado ser 4 <= n <= 14 e par
+function comecar(){
 do {
     n = prompt("Diga o numero o cartas");
 } while (n < 4 || n > 14 || n % 2 == 1);
 
 displaycartas(n)
-
+}
+comecar()
 
 function displaycartas(n) {
     //vai colocar n cartas na tela
 
-    //loop para dar display nas n primeiras cartas da lista_cartas
-    //e adicionar na lista_visiveis
 
-    for (let i = 0; i < n; i++) {
-
-        let butao = lista_cartas[i]
-        butao.classList.remove("esconder")
-
+    for (let i=0; i<n; i++){
+        let butao =lista_cartas[i]
         lista_visiveis.push(butao)
 
+        butao.classList.remove("esconder")
+
     }
+    
 }
 
 //Não estou conseguindo mostrar elas de maneira aleatoria, só alterando a ordem da lista
@@ -70,8 +68,11 @@ function clicarcarta(elemento) {
 
         cartas_pra_comparar.push(elemento)
 
-        comparar();
+        setTimeout(comparar, 1500)
+        
     }
+
+    contar_clicadas += 1;
 
     //teste
     //console.log(`essa é a função clicar carta:\n ${cartas_pra_comparar}`)
@@ -124,9 +125,13 @@ function comparar() {
     }
 }
 
-// pq nao ta dando o alert?
+
 function fim_de_jogo() {
     if (cartas_acertou.length == lista_visiveis.length){
-        alert("acabou")
+        alert(`Você ganhou em ${contar_clicadas} jogadas!`)
+        r = prompt("voce quer continuar?")
+        if(r == "sim"){
+            comecar()
+        }
     }
 }
