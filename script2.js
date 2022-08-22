@@ -90,7 +90,7 @@ function clicarcarta(elemento) {
         contar_clicadas += 1;
 
         //teste
-        console.log(`teste clicar_carta 1°if: ${elemento}`)
+        //console.log(`teste clicar_carta 1°if: ${elemento}`)
 
     } else if (segunda_carta === undefined && !(elemento.classList.contains("virar"))) {
         segunda_carta = elemento;
@@ -98,7 +98,7 @@ function clicarcarta(elemento) {
         contar_clicadas += 1;
 
         //teste
-        console.log(`teste clicar_carta 1°if: ${elemento}`)
+        //console.log(`teste clicar_carta 2°if: ${elemento}`)
 
     }
 
@@ -119,14 +119,14 @@ function clicarcarta(elemento) {
                 primeira_carta = undefined
                 segunda_carta = undefined
 
-            }, 1500)
+            }, 1000)
         }
 
 
     }
 
     //teste
-    console.log(`teste clicar_carta 2°if: ${certo}`)
+    console.log(`teste clicar_carta 3°if: ${certo}`)
 
     /* sepa bonus
     if (plays === 1) {
@@ -138,11 +138,12 @@ function clicarcarta(elemento) {
 
 function fim_de_jogo() {
     if (certo == baralho.length) {
-        alert(`Parabens! Você terminou em ${contar_clicadas}`)
+        alert(`Parabens! Você terminou em ${contar_clicadas} clicadas`)
         resp = prompt("Quer continuar sofrendo?")
         if(resp==="sim"){
             document.querySelector(".jogo").innerHTML = ""
             baralho = []
+            certo = 0
             comecar()
 
         }
