@@ -1,6 +1,6 @@
 //LISTA COM AS CARTAS
 let cartas = document.querySelectorAll(".carta");
-lista_cartas = [...cartas];
+let lista_cartas = [...cartas];
 
 //lista das cartas que vão aparecer na tela
 let lista_visiveis = []
@@ -13,28 +13,32 @@ let cartas_acertou = []
 //contador de clicadas
 let contar_clicadas = 0;
 
-//loop parar  ficar dando prompt até o numero desejado ser 4 <= n <= 14 e par
-function comecar(){
-do {
-    n = prompt("Diga o numero o cartas");
-} while (n < 4 || n > 14 || n % 2 == 1);
 
-displaycartas(n)
+//loop parar  ficar dando prompt até o numero desejado ser 4 <= n <= 14 e par
+function comecar() {
+    do {
+        n = prompt("Diga o numero o cartas");
+    } while (n < 4 || n > 14 || n % 2 == 1);
+
+    displaycartas(n)
 }
+
 comecar()
 
 function displaycartas(n) {
-    //vai colocar n cartas na tela
+    //vai colocar n cartas na tela, removendo a classe esconder
 
-
-    for (let i=0; i<n; i++){
-        let butao =lista_cartas[i]
+    for (let i = 0; i < n; i++) {
+        let butao = lista_cartas[i]
         lista_visiveis.push(butao)
 
         butao.classList.remove("esconder")
 
     }
-    
+
+    //teste
+    //console.log(lista_visiveis)
+
 }
 
 //Não estou conseguindo mostrar elas de maneira aleatoria, só alterando a ordem da lista
@@ -60,16 +64,18 @@ function clicarcarta(elemento) {
     const gif = elemento.querySelector(".carta  .gif")
     const imagem = elemento.querySelector(".carta  .imagem")
 
-//condição para evitar bugs se o user clicar em uma carta que não está escondida
+    //condição para evitar bugs se o user clicar em uma carta que não está escondida
     if (gif.classList.contains("esconder")) {
 
         gif.classList.remove("esconder")
         imagem.classList.add("esconder")
 
+        //colcoar na lista de cartas_pra_compoar
         cartas_pra_comparar.push(elemento)
 
+        //comparar as cartas depois de um 1,5s
         setTimeout(comparar, 1500)
-        
+
     }
 
     contar_clicadas += 1;
@@ -80,8 +86,12 @@ function clicarcarta(elemento) {
 }
 
 
-
+//função para virar de volta as cartas caso estejam erradas
+//pq nao ta definido?
 function fecharcarta(cartavirada) {
+
+    //teste
+    //console.log(`assim que chamar, mostre isso:${cartavirada}`)
 
     const gif = cartavirada.querySelector(".carta  .gif")
     const imagem = cartavirada.querySelector(".carta  .imagem")
@@ -97,6 +107,7 @@ function fecharcarta(cartavirada) {
 
 }
 
+//uma vez que viramos duas cartas, é preciso compará-las 
 function comparar() {
 
     if (cartas_pra_comparar.length == 2) {
@@ -120,17 +131,31 @@ function comparar() {
         cartas_pra_comparar.pop()
         cartas_pra_comparar.pop()
         //teste
-        //console.log(`essa é a função comparar carta depois dos ifs:\n ${cartas_pra_comparar} `)
+        console.log(`essa é a função comparar carta depois dos ifs:\n ${cartas_pra_comparar} `)
 
     }
 }
 
-
+//final do jogo, quando todas as cartas foram acertada
 function fim_de_jogo() {
-    if (cartas_acertou.length == lista_visiveis.length){
+    if (cartas_acertou.length == lista_visiveis.length) {
         alert(`Você ganhou em ${contar_clicadas} jogadas!`)
+
+        //teste
+        console.log(lista_visiveis)
+
         r = prompt("voce quer continuar?")
-        if(r == "sim"){
+        if (r == "sim") {
+
+            for (let i = 0; i < 4; i++) {
+                
+                console.log(lista_visiveis,i)
+                //ta tendo um bug na linha de baixo
+                //fecharcarta(lista_visiveis[i])
+                lista_visiveis.pop()
+                console.log(lista_visiveis)
+            }
+
             comecar()
         }
     }
