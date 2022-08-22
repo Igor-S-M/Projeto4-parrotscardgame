@@ -16,6 +16,9 @@ let contar_clicadas = 0;
 
 //loop parar  ficar dando prompt até o numero desejado ser 4 <= n <= 14 e par
 function comecar() {
+
+    contar_clicadas = 0;
+
     do {
         n = prompt("Diga o numero o cartas");
     } while (n < 4 || n > 14 || n % 2 == 1);
@@ -144,19 +147,5 @@ function fim_de_jogo() {
         //teste
         console.log(lista_visiveis)
 
-        r = prompt("voce quer continuar?")
-        if (r == "sim") {
-
-            for (let i = 0; i < 4; i++) {
-                
-                console.log(lista_visiveis,i)
-                //ta tendo um bug na linha de baixo
-                //fecharcarta(lista_visiveis[i])
-                lista_visiveis.pop()
-                console.log(lista_visiveis)
-            }
-
-            comecar()
-        }
     }
 }
