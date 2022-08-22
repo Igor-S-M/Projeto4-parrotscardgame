@@ -1,12 +1,18 @@
 //LISTA COM AS CARTAS
 let cartas = document.querySelectorAll(".carta");
 lista_cartas = [...cartas];
+lista_cartas_pares=[];
 
+for (let i=0; i<lista_cartas.length;i+=2){
+    lista_cartas_pares.push(lista_cartas[i])
+}
 
 //lista das cartas que vão aparecer na tela
-lista_visiveis = []
+let lista_visiveis = []
 //lista das cartas que estão viradas para cima
-cartas_pra_cima = []
+let cartas_pra_comparar = []
+
+let cartas_acertou = []
 
 
 //loop parar  ficar dando prompt até o numero desejado ser 4 <= n <= 14 e par
@@ -62,13 +68,13 @@ function clicarcarta(elemento) {
         gif.classList.remove("esconder")
         imagem.classList.add("esconder")
 
-        cartas_pra_cima.push(elemento)
+        cartas_pra_comparar.push(elemento)
 
         comparar();
     }
 
     //teste
-    //console.log(`essa é a função clicar carta:\n ${cartas_pra_cima}`)
+    //console.log(`essa é a função clicar carta:\n ${cartas_pra_comparar}`)
 
 }
 
@@ -82,70 +88,45 @@ function fecharcarta(cartavirada) {
     gif.classList.add("esconder")
     imagem.classList.remove("esconder")
 
-    cartas_pra_cima.pop()
+    cartas_pra_comparar.pop()
 
     //teste
-    //console.log(`essa é a função fechar carta:\n ${cartas_pra_cima}`)
+    //console.log(`essa é a função fechar carta:\n ${cartas_pra_comparar}`)
 
 
 }
 
 function comparar() {
 
-    if (cartas_pra_cima.length == 2) {
+    if (cartas_pra_comparar.length == 2) {
         //teste
-        //console.log(`essa é a função comparar carta 1° if: \n ${cartas_pra_cima}`)
+        //console.log(`essa é a função comparar carta 1° if: \n ${cartas_pra_comparar}`)
 
-        if (cartas_pra_cima[0].querySelector('.gif img').src !=
-            cartas_pra_cima[1].querySelector('.gif img').src) {
+        if (cartas_pra_comparar[0].querySelector('.gif img').src !=
+            cartas_pra_comparar[1].querySelector('.gif img').src) {
 
             //teste
-            //console.log(`essa é a função comparar carta 2° if:\n ${cartas_pra_cima}`)
-            fecharcarta(cartas_pra_cima[1])
-            fecharcarta(cartas_pra_cima[0])
+            //console.log(`essa é a função comparar carta 2° if:\n ${cartas_pra_comparar}`)
+            fecharcarta(cartas_pra_comparar[1])
+            fecharcarta(cartas_pra_comparar[0])
 
 
         } else {
+            cartas_acertou.push(cartas_pra_comparar[1])
+            cartas_acertou.push(cartas_pra_comparar[0])
             fim_de_jogo()
         }
-        cartas_pra_cima.pop()
-        cartas_pra_cima.pop()
+        cartas_pra_comparar.pop()
+        cartas_pra_comparar.pop()
         //teste
-        //console.log(`essa é a função comparar carta depois dos ifs:\n ${cartas_pra_cima} `)
+        //console.log(`essa é a função comparar carta depois dos ifs:\n ${cartas_pra_comparar} `)
 
     }
 }
 
 // pq nao ta dando o alert?
 function fim_de_jogo() {
-    lista = []
-    contador = 0
-    //o erro supostamente esta aqui
-    for (let i = 0; i < lista_visiveis.length; i++) {
-        let resp = lista_visiveis[i].classlist.contains("esconder")
-        lista.push(resp)
-
-        //teste
-        console.log(resp, lista)
-
-    }
-    for (let i = 0; i < lista.length; i++) {
-        if (lista[i] == false) {
-            contador += 1
-        }
-
-        //teste
-        console.log(contador, lista)
-
-    }
-    if (contador == lista_visiveis.length) {
-        alert("Acabou! Parabens!")
-
-        //teste
-        console.log(resp, lista)
-    } else {
-
-        //teste
-        console.log(resp, lista)
+    if (cartas_acertou.length == lista_visiveis.length){
+        alert("acabou")
     }
 }
